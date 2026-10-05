@@ -31,18 +31,19 @@ def national_id(raw: str) -> Result:
     """Mask a Kenyan national ID number, keeping the first 3 and last 3 digits.
 
     The ID format is not verified: this is a masking helper, not a
-    validator. It masks whatever digits it is given, 7 to 9 digits being
-    the common lengths.
+    validator. The mask is always three stars, so it does not reveal the
+    length of the ID. Fewer than 7 digits is refused: with the first and
+    last 3 kept, a shorter number would stay fully readable.
     """
     if raw is None:
         return Result(value=None, status="invalid", reason="no ID number found")
     digits = "".join(character for character in str(raw) if character.isdigit())
     if not digits:
         return Result(value=None, status="invalid", reason="no ID number found")
-    if len(digits) < 5:
+    if len(digits) < 7:
         return Result(value=None, status="invalid", reason="too short to mask safely")
     return Result(
-        value=digits[:3] + "*" * (len(digits) - 6) + digits[-3:],
+        value=digits[:3] + "***" + digits[-3:],
         status="fixed",
         reason="masked for sharing",
     )

@@ -23,6 +23,14 @@ ID_CASES = [
 ]
 
 
+def test_id_mask_hides_length() -> None:
+    eight = national_id("12345678").value
+    nine = national_id("123456789").value
+    assert eight == "123***678"
+    assert nine == "123***789"  # same mask width regardless of input length
+    assert national_id("1234567").value == "123***567"
+
+
 @pytest.mark.parametrize(("raw", "expected"), PHONE_CASES)
 def test_phone_mask(raw: str, expected: str) -> None:
     result = phone(raw)
