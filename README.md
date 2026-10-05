@@ -21,8 +21,8 @@ Ten messy rows in, cleaned values out. This table is the spec the package is tes
 | 3 | phone | `712345678` | `+254712345678` | fixed | reformatted to E.164 |
 | 4 | phone | `0110 987 654` | `+254110987654` | fixed | reformatted to E.164 |
 | 5 | phone | `07123456789` | *(empty)* | invalid | too long for a Kenyan mobile |
-| 6 | county | `Murang'a` | `Murang'a` (042) | valid | |
-| 7 | county | `muranga` | `Murang'a` (042) | fixed | matched alias, fuzzy |
+| 6 | county | `Murang'a` | `Murang'a` (021) | valid | |
+| 7 | county | `muranga` | `Murang'a` (021) | fixed | matched alias, fuzzy |
 | 8 | county | `Nairobi City` | `Nairobi` (047) | fixed | matched alias, exact |
 | 9 | amount | `Ksh 1,200/=` | `1200.00` | fixed | parsed KES amount |
 | 10 | pin | `A0039284B ` | `A0039284B` | fixed | trimmed spaces |
