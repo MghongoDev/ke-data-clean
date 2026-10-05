@@ -28,8 +28,10 @@ dependencies = []
 
 [project.optional-dependencies]
 pandas = ["pandas>=1.5"]
-cli = ["typer>=0.9"]
-dev = ["pytest>=8", "ruff>=0.5", "phonenumbers>=8.13", "pandas>=1.5", "typer>=0.9"]
+# The command parses and writes CSVs through pandas, so the cli extra
+# carries it too; the core package stays dependency-free.
+cli = ["pandas>=1.5"]
+dev = ["pytest>=8", "ruff>=0.5", "phonenumbers>=8.13", "pandas>=1.5"]
 
 [project.scripts]
 ke-clean = "ke_data_clean.cli:main"
@@ -41,7 +43,7 @@ Changelog = "https://github.com/ke-data-clean/ke-data-clean/blob/main/CHANGELOG.
 packages = ["src/ke_data_clean"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src", "tests", "README.md", "CHANGELOG.md", "LICENSE"]
+include = ["src", "tests", "docs", "scripts", "README.md", "CHANGELOG.md", "LICENSE"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
