@@ -86,7 +86,10 @@ def _reject_or_expand_shorthand(cleaned: str, allow_shorthand: bool) -> Result |
             ),
         )
     number = Decimal(match.group("number")) * _SHORTHAND_MULTIPLIERS[match.group("suffix").lower()]
-    return Result(value=str(number.normalize()), status="fixed", reason="expanded shorthand")
+    # The "f" format keeps plain decimal notation; str() of a normalized
+    # Decimal would give 1.2E+3, which is not a canonical amount string.
+    value = format(number.normalize(), "f")
+    return Result(value=value, status="fixed", reason="expanded shorthand")
 
 
 def parse_kes(raw: str, allow_shorthand: bool = False) -> Result:

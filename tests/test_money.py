@@ -56,11 +56,14 @@ def test_parse_kes(raw: str, expected_value: str | None, expected_status: str) -
 def test_shorthand_opt_in_expands() -> None:
     result = parse_kes("1.2k", allow_shorthand=True)
     assert result.status == "fixed"
+    assert result.value == "1200"  # plain decimal, never 1.2E+3
     assert Decimal(result.value) == Decimal("1200")
 
 
 def test_shorthand_millions_opt_in() -> None:
     result = parse_kes("2.5m", allow_shorthand=True)
+    assert result.status == "fixed"
+    assert result.value == "2500000"  # plain decimal, never 2.5E+6
     assert Decimal(result.value) == Decimal("2500000")
 
 
