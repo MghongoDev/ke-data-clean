@@ -75,6 +75,12 @@ def validate(
         A Result whose value is the cleaned PIN when the status is
         "valid" or "fixed", and None otherwise. Format check only: a
         passing result does not prove the PIN exists at KRA.
+
+    Example:
+        >>> validate("a012345678b")
+        Result(value='A012345678B', status='fixed', reason='uppercased')
+        >>> validate("A01234567B").reason
+        'expected 11 characters, got 10'
     """
     if raw is None:
         return Result(value=None, status="invalid", reason="no PIN found")

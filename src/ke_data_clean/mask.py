@@ -18,6 +18,12 @@ def phone(raw: str) -> Result:
     stable across input formats: ``0712 345 678`` and ``+254-712-345-678``
     both give ``+25471*****78``. Invalid numbers return the phone
     validator's result unchanged, so the reason travels with the data.
+
+    Example:
+        >>> phone("0712 345 678").value
+        '+25471*****78'
+        >>> phone("+254-712-345-678").value
+        '+25471*****78'
     """
     result = _normalize_phone(raw)
     if result.value is None:
@@ -34,6 +40,12 @@ def national_id(raw: str) -> Result:
     validator. The mask is always three stars, so it does not reveal the
     length of the ID. Fewer than 7 digits is refused: with the first and
     last 3 kept, a shorter number would stay fully readable.
+
+    Example:
+        >>> national_id("12345678").value
+        '123***678'
+        >>> national_id("12345").status
+        'invalid'
     """
     if raw is None:
         return Result(value=None, status="invalid", reason="no ID number found")

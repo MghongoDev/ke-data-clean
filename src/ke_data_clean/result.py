@@ -19,6 +19,10 @@ class Result:
         value: The cleaned value, or None when the input could not be cleaned.
         status: One of "valid", "fixed", "invalid", "ambiguous".
         reason: Why the status holds. Empty when the input was already valid.
+
+    Example:
+        >>> Result(value="1200", status="fixed", reason="parsed KES amount")
+        Result(value='1200', status='fixed', reason='parsed KES amount')
     """
 
     value: str | None

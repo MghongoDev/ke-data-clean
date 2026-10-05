@@ -33,6 +33,10 @@ def clean_value(raw: str, kind: str, **options: object) -> Result:
     Raises:
         ValueError: When the kind is not registered. The message lists
             the known kinds.
+
+    Example:
+        >>> clean_value("0712 345 678", "phone").value
+        '+254712345678'
     """
     validator = KINDS.get(kind)
     if validator is None:

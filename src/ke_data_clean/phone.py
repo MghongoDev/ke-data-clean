@@ -122,6 +122,12 @@ def normalize(raw: str, default_region: str = DEFAULT_REGION) -> Result:
         "valid" or "fixed", and None otherwise. A number already in
         canonical form returns status "valid"; any other accepted shape
         returns "fixed" with a reason.
+
+    Example:
+        >>> normalize("0712 345 678")
+        Result(value='+254712345678', status='fixed', reason='reformatted to E.164')
+        >>> normalize("020 2318463").reason
+        'not a mobile number (landline support deferred)'
     """
     if raw is None:
         return Result(value=None, status="invalid", reason="empty input")

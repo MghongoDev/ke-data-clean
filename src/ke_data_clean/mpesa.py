@@ -70,6 +70,12 @@ def parse_details(text: str) -> Parsed | None:
     Returns:
         A Parsed with the kind, counterparty id, name and account, or
         None when the text matches no known pattern.
+
+    Example:
+        >>> parse_details("Sent to JOHN DOE - 254712345678")
+        Parsed(kind='send', id='254712345678', name='JOHN DOE', account=None)
+        >>> parse_details("some new wording") is None
+        True
     """
     if text is None:
         return None

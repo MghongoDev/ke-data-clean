@@ -119,6 +119,14 @@ def parse_kes(raw: str, allow_shorthand: bool = False) -> Result:
     Returns:
         A Result whose value is the amount as a decimal string when the
         status is "valid" or "fixed", and None otherwise.
+
+    Example:
+        >>> parse_kes("Ksh 1,200/=")
+        Result(value='1200', status='fixed', reason='parsed KES amount')
+        >>> parse_kes("1.2k").status
+        'invalid'
+        >>> parse_kes("1.2k", allow_shorthand=True).value
+        '1200'
     """
     if raw is None:
         return Result(value=None, status="invalid", reason="no amount found")

@@ -117,6 +117,12 @@ def normalize(raw: str) -> Result:
         A Result whose value is the official county name when the status
         is "valid" or "fixed", and None otherwise. Use ``code_for`` to
         get the three-digit code.
+
+    Example:
+        >>> normalize("muranga")
+        Result(value="Murang'a", status='fixed', reason='matched alias, exact')
+        >>> normalize("kiifi").status
+        'ambiguous'
     """
     if raw is None:
         return Result(value=None, status="invalid", reason="no county name found")
@@ -135,7 +141,12 @@ def normalize(raw: str) -> Result:
 
 
 def code_for(name: str) -> str | None:
-    """Return the three-digit county code for an official name, or None."""
+    """Return the three-digit county code for an official name, or None.
+
+    Example:
+        >>> code_for("Nairobi")
+        '047'
+    """
     for code, official in _load_rows():
         if official == name:
             return code
