@@ -47,7 +47,8 @@ def test_phone_mask_passes_invalid_through_with_reason() -> None:
 def test_phone_mask_keeps_digit_count() -> None:
     masked = phone("0712345678").value
     assert len(masked) == len("+254712345678")
-    assert masked.count("*") == 3
+    assert masked == "+25471*****78"  # first 6 and last 2 of 13 characters kept
+    assert masked.count("*") == 5
 
 
 @pytest.mark.parametrize(("raw", "expected"), ID_CASES)
