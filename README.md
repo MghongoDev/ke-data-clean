@@ -24,7 +24,7 @@ Ten messy rows in, cleaned values out. This table is the spec the package is tes
 | 6 | county | `Murang'a` | `Murang'a` (021) | valid | |
 | 7 | county | `muranga` | `Murang'a` (021) | fixed | matched alias, fuzzy |
 | 8 | county | `Nairobi City` | `Nairobi` (047) | fixed | matched alias, exact |
-| 9 | amount | `Ksh 1,200/=` | `1200.00` | fixed | parsed KES amount |
+| 9 | amount | `Ksh 1,200/=` | `1200` | fixed | parsed KES amount |
 | 10 | pin | ` a012345678b` | `A012345678B` | fixed | removed spaces, uppercased |
 
 ## Install
