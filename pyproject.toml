@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ke-data-clean"
+version = "0.1.0"
+description = "Clean Kenyan data: phone numbers, KRA PINs, counties, KES amounts, M-Pesa details."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "ke-data-clean contributors" }]
+keywords = ["kenya", "data-cleaning", "e164", "kra-pin", "counties", "mpesa", "kes"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+pandas = ["pandas>=1.5"]
+cli = ["typer>=0.9"]
+dev = ["pytest>=8", "ruff>=0.5", "phonenumbers>=8.13", "pandas>=1.5", "typer>=0.9"]
+
+[project.scripts]
+ke-clean = "ke_data_clean.cli:main"
+
+[project.urls]
+Changelog = "https://github.com/ke-data-clean/ke-data-clean/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ke_data_clean"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src", "tests", "README.md", "CHANGELOG.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "C90", "SIM"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.isort]
+known-first-party = ["ke_data_clean"]
