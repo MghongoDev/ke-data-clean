@@ -184,24 +184,37 @@ def _build_report(
     original: pd.DataFrame,
     results: dict[str, pd.DataFrame],
 ) -> pd.DataFrame:
-    """One row per non-valid cell: row number, column, original, new, status, reason."""
-    rows: list[dict[str, object]] = []
+    """One row per non-valid cell: row number, column, original, new, status, reason.
+
+    The columns are gathered as plain lists instead of row iteration:
+    ``iterrows`` builds a Series per row, which dominates the runtime on
+    six-figure row counts.
+    """
+    row_numbers: list[int] = []
+    columns: list[str] = []
+    originals: list[object] = []
+    new_values: list[object] = []
+    statuses: list[str] = []
+    reasons: list[str] = []
     for column, result_frame in results.items():
         changed = result_frame[result_frame["status"] != "valid"]
-        for position, entry in changed.iterrows():
-            rows.append(
-                {
-                    "row": position + 1,
-                    "column": column,
-                    "original": original.at[position, column],
-                    "new": entry["value"] if entry["value"] is not None else "",
-                    "status": entry["status"],
-                    "reason": entry["reason"],
-                }
-            )
+        row_numbers.extend(position + 1 for position in changed.index.tolist())
+        columns.extend([column] * len(changed))
+        originals.extend(original.loc[changed.index, column].tolist())
+        new_values.extend(
+            value if value is not None else "" for value in changed["value"].tolist()
+        )
+        statuses.extend(changed["status"].tolist())
+        reasons.extend(changed["reason"].tolist())
     return pd.DataFrame(
-        rows,
-        columns=["row", "column", "original", "new", "status", "reason"],
+        {
+            "row": row_numbers,
+            "column": columns,
+            "original": originals,
+            "new": new_values,
+            "status": statuses,
+            "reason": reasons,
+        },
         dtype=object,
     )
 

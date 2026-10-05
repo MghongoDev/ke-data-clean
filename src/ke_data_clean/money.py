@@ -49,23 +49,39 @@ def _last_group_ok(last: str) -> bool:
     return point == "" or (fraction.isdigit() and fraction != "")
 
 
+def _first_group_ok(first: str) -> bool:
+    """The first group holds 1 to 3 digits."""
+    return first.isdigit() and len(first) <= 3
+
+
+def _middle_groups_ok(middles: list[str]) -> bool:
+    """Every middle group is exactly 3 digits."""
+    return all(len(middle) == 3 and middle.isdigit() for middle in middles)
+
+
+def _split_groups(decorated: str) -> list[str] | None:
+    """Split a decorated number into groups, or None when it cannot be grouped."""
+    if "," not in decorated and " " not in decorated:
+        return None
+    if decorated.count(".") > 1:
+        return None
+    groups = [group for group in re.split(r"[,\s]+", decorated) if group]
+    if len(groups) < 2:
+        return None
+    return groups
+
+
 def _canonicalize_number(decorated: str) -> tuple[str | None, str]:
     """Validate separators and return the plain digit string and a failure reason."""
     if _NUMBER.match(decorated):
         return decorated, ""
-    if not ("," in decorated or " " in decorated):
+    groups = _split_groups(decorated)
+    if groups is None:
         return None, "not a recognizable KES amount"
-    if decorated.count(".") > 1:
-        return None, "not a recognizable KES amount"
-    groups = [group for group in re.split(r"[,\s]+", decorated) if group]
-    if len(groups) < 2:
-        return None, "not a recognizable KES amount"
-    first = groups[0]
-    if not first.isdigit() or len(first) > 3:
+    if not _first_group_ok(groups[0]):
         return None, "looks like more than one number"
-    for middle in groups[1:-1]:
-        if len(middle) != 3 or not middle.isdigit():
-            return None, "irregular thousands grouping"
+    if not _middle_groups_ok(groups[1:-1]):
+        return None, "irregular thousands grouping"
     if not _last_group_ok(groups[-1]):
         return None, "irregular thousands grouping"
     return "".join(groups), ""

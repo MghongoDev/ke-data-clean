@@ -88,6 +88,8 @@ The command writes `<col>_clean` and `<col>_status` columns beside the originals
 
 Issues and pull requests are welcome. Run `ruff check .` and `pytest` before you submit. Rule changes (phone prefixes, county data) must cite a primary source in the changelog.
 
+Two checkpoints guard the rest: `scripts/checkpoint.py` (counts add up on 10,000 synthetic rows, re-runs are byte-identical, 100,000 rows stay under a minute) and `scripts/complexity_report.py` (no function over cyclomatic complexity 10; latest output in [docs/complexity-report.md](docs/complexity-report.md)).
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
