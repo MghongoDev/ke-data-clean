@@ -37,7 +37,7 @@ dev = ["pytest>=8", "ruff>=0.5", "phonenumbers>=8.13", "pandas>=1.5"]
 ke-clean = "ke_data_clean.cli:main"
 
 [project.urls]
-Changelog = "https://github.com/ke-data-clean/ke-data-clean/blob/main/CHANGELOG.md"
+Changelog = "https://github.com/MghongoDev/ke-data-clean/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ke_data_clean"]
