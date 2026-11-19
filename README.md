@@ -79,17 +79,17 @@ The command writes `<col>_clean` and `<col>_status` columns beside the originals
 
 ## Documentation
 
-- [Getting started](docs/tutorial.md) — a worked tutorial from raw CSV to cleaned output
-- [How-to guides](docs/how-to.md) — specific tasks: pandas, CLI, strict mode, masking
-- [Reference](docs/reference.md) — every public function and its signatures
-- [Explanation](docs/explanation.md) — why the Result contract exists, and the rules behind each validator
+- [Getting started](https://github.com/MghongoDev/ke-data-clean/blob/main/docs/tutorial.md) — a worked tutorial from raw CSV to cleaned output
+- [How-to guides](https://github.com/MghongoDev/ke-data-clean/blob/main/docs/how-to.md) — specific tasks: pandas, CLI, strict mode, masking
+- [Reference](https://github.com/MghongoDev/ke-data-clean/blob/main/docs/reference.md) — every public function and its signatures
+- [Explanation](https://github.com/MghongoDev/ke-data-clean/blob/main/docs/explanation.md) — why the Result contract exists, and the rules behind each validator
 
 ## Contributing
 
 Issues and pull requests are welcome. Run `ruff check .` and `pytest` before you submit. Rule changes (phone prefixes, county data) must cite a primary source in the changelog.
 
-Two checkpoints guard the rest: `scripts/checkpoint.py` (counts add up on 10,000 synthetic rows, re-runs are byte-identical, 100,000 rows stay under a minute) and `scripts/complexity_report.py` (no function over cyclomatic complexity 10; latest output in [docs/complexity-report.md](docs/complexity-report.md)).
+Two checkpoints guard the rest: `scripts/checkpoint.py` (counts add up on 10,000 synthetic rows, re-runs are byte-identical, 100,000 rows stay under a minute) and `scripts/complexity_report.py` (no function over cyclomatic complexity 10; latest output in [docs/complexity-report.md](https://github.com/MghongoDev/ke-data-clean/blob/main/docs/complexity-report.md)).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](https://github.com/MghongoDev/ke-data-clean/blob/main/LICENSE).
