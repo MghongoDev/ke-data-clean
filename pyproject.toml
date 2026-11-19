@@ -31,7 +31,10 @@ pandas = ["pandas>=1.5"]
 # The command parses and writes CSVs through pandas, so the cli extra
 # carries it too; the core package stays dependency-free.
 cli = ["pandas>=1.5"]
-dev = ["pytest>=8", "ruff>=0.5", "phonenumbers>=8.13", "pandas>=1.5"]
+# The phone cross-check compares our October 2026 prefix snapshot against
+# libphonenumber metadata. 9.0.42 added ranges the snapshot predates, so the
+# oracle is pinned to the matching metadata until the snapshot is refreshed.
+dev = ["pytest>=8", "ruff>=0.5", "phonenumbers>=8.13,<9.0.42", "pandas>=1.5"]
 
 [project.scripts]
 ke-clean = "ke_data_clean.cli:main"
