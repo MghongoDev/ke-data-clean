@@ -12,3 +12,7 @@ venv/
 htmlcov/
 .ipynb_checkpoints/
 *.csv.tmp
+
+# Publishing and implementation notes stay local to the working copy.
+PUBLISHING.md
+ke-data-clean-implementation-guide.md
