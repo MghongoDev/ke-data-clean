@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); the project uses [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-11-19
+
+### Fixed
+
+- Documentation links in the PyPI description now point to the repository files instead of paths under pypi.org, which returned 404.
+
+### Added
+
+- A Documentation project URL in the package metadata, so the project links on PyPI lead to the guides.
+
 ## [0.1.0] - 2026-10-05
 
 First release.

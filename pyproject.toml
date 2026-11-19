@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ke-data-clean"
-version = "0.1.0"
+version = "0.1.1"
 description = "Clean Kenyan data: phone numbers, KRA PINs, counties, KES amounts, M-Pesa details."
 readme = "README.md"
 requires-python = ">=3.10"
